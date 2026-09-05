@@ -1,7 +1,7 @@
 package org.lms;
 
 public class Main {
-    static void main() {
+    public static void main() {
 
     }
 }

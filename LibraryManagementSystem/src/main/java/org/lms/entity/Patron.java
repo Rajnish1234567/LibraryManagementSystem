@@ -11,7 +11,7 @@ public class Patron {
     private String phone;
 
     // Stores borrowing history
-    private final List<Book> borrowingHistory;
+    private final List<BorrowingRecord> borrowingHistory;
 
     public Patron(int patronId, String name, String email, String phone) {
         this.patronId = patronId;
@@ -37,7 +37,7 @@ public class Patron {
         return phone;
     }
 
-    public List<Book> getBorrowingHistory() {
+    public List<BorrowingRecord> getBorrowingHistory() {
         return borrowingHistory;
     }
 
@@ -53,8 +53,8 @@ public class Patron {
         this.phone = phone;
     }
 
-    public void addToBorrowingHistory(Book book) {
-        borrowingHistory.add(book);
+    public void addBorrowingRecord(BorrowingRecord record) {
+        borrowingHistory.add(record);
     }
 
     @Override

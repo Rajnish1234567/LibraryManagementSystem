@@ -1,6 +1,7 @@
 package org.lms.service;
 
 import org.lms.entity.Book;
+import org.lms.entity.BorrowingRecord;
 import org.lms.entity.Patron;
 import org.lms.exception.AlreadyExistsException;
 import org.lms.exception.NotFoundException;
@@ -43,21 +44,8 @@ public class PatronService {
         return Optional.ofNullable(patrons.get(patronId));
     }
 
-    // Add borrowed book to patron history
-    public void addBorrowingHistory(int patronId, Book book) {
-
-        Patron patron = patrons.get(patronId);
-        if (patron == null) {
-            throw new NotFoundException(
-                    "No patron found with ID: " + patronId
-            );
-        }
-
-        patron.addToBorrowingHistory(book);
-    }
-
     // Get borrowing history
-    public List<Book> getBorrowingHistory(int patronId) {
+    public List<BorrowingRecord> getBorrowingHistory(int patronId) {
 
         Patron patron = patrons.get(patronId);
         if (patron == null) {
