@@ -17,8 +17,8 @@ public class LibraryBranch {
 
     private final String branchId;
     private final String name;
-    private final Map<String, Book> inventory = new ConcurrentHashMap<>(); // ISBN -> Book
-    private final Map<String, Loan> activeLoans = new ConcurrentHashMap<>(); // ISBN -> Loan
+    private final Map<String, Book> inventory = new ConcurrentHashMap<>();
+    private final Map<String, Loan> activeLoans = new ConcurrentHashMap<>();
 
     private final ReservationService reservationService;
     private SearchStrategy searchStrategy;
