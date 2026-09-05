@@ -1,88 +1,48 @@
 package org.lms.entity;
 
-import org.lms.exception.NotFoundException;
+import java.util.Objects;
 
 public class Book {
-
+    private final String isbn;
     private String title;
     private String author;
-    private String isbn;
     private int publicationYear;
     private boolean available;
+    private String currentBranchId;
 
-    public Book(
-            String title,
-            String author,
-            String isbn,
-            int publicationYear
-    ) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
+    public Book(String isbn, String title, String author, int publicationYear) {
+        this.isbn = Objects.requireNonNull(isbn);
+        this.title = Objects.requireNonNull(title);
+        this.author = Objects.requireNonNull(author);
         this.publicationYear = publicationYear;
         this.available = true;
     }
 
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
+    public String getIsbn() { return isbn; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getAuthor() { return author; }
+    public void setAuthor(String author) { this.author = author; }
+    public void setPublicationYear(int publicationYear) { this.publicationYear = publicationYear; }
+    public boolean isAvailable() { return available; }
+    public void setAvailable(boolean available) { this.available = available; }
+    public void setCurrentBranchId(String currentBranchId) { this.currentBranchId = currentBranchId; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        return isbn.equals(((Book) o).isbn);
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void checkout() {
-        if (!available) {
-            throw new NotFoundException(
-                    "Book is already checked out"
-            );
-        }
-        available = false;
-    }
-
-    public void returnBook() {
-        if (available) {
-            throw new IllegalStateException(
-                    "Book is already available"
-            );
-        }
-        available = true;
+    @Override
+    public int hashCode() {
+        return isbn.hashCode();
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", publicationYear=" + publicationYear +
-                ", available=" + available +
-                '}';
+        return String.format("Book{isbn='%s', title='%s', author='%s', year=%d, available=%s, branch=%s}",
+                isbn, title, author, publicationYear, available, currentBranchId);
     }
 }
